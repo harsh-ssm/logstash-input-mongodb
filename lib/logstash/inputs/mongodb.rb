@@ -302,6 +302,8 @@ class LogStash::Inputs::MongoDB < LogStash::Inputs::Base
                   else
                     event.set(k.to_s, v)
                   end
+                elsif v.is_a?(TrueClass) || v.is_a?(FalseClass)
+                    event.set(k.to_s,v.to_s)
                 else
                   if k.to_s  == "_id" || k.to_s == "tags"
                     event.set(k.to_s, v.to_s )
